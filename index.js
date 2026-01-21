@@ -9,20 +9,17 @@ const PORT = 8000;
 mongoose.connect("mongodb://127.0.0.1:27017/blogify")
     .then(() => console.log("MongoDB Connected"))
     .catch((err) => console.log("Mongo Error", err));
-
-// 2. Middlewares
-app.use(express.urlencoded({ extended: false })); // To parse form data
-app.use(cookieParser()); // To parse auth cookies
-app.use(express.static(path.resolve("./public"))); // Serve static assets
+    
+app.use(express.urlencoded({ extended: false })); 
+app.use(cookieParser()); 
+app.use(express.static(path.resolve("./public"))); 
 app.use("/user", userRoute);
 
 app.listen(PORT, () => console.log(`Server Started at PORT:${PORT}`));
 
-// 3. View Engine Setup
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
-// 4. Routes
 app.get("/", (req, res) => {
   res.render("home");
 });
